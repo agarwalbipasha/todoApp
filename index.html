@@ -7,25 +7,29 @@
 
     <title>ToDo App</title>
 
-	<link rel="shortcut icon" href="#" />
+    <link rel="shortcut icon" href="#" />
     <link rel="stylesheet" type="text/css" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
-    </head>
+    
+    
+  </head>
 
-
-    <body>
-        <header>todo's</header>
-		<main>
-			<form>
-				<input type="text" placeholder="What needs to be done?" id="input-area">
+  <body>
+    <header>todo's</header>
+    <main>
+      <form id="addForm">
+        <input type="text" placeholder="What needs to be done?" class="input-area" >
+        <ul id='items' class="list-group"></ul>
       </form>
-			<section>
-				<ul class="list-group" id="items"></ul>
-			</section>
-		</main>
-
-		<script type="text/javascript" src="app.js">
-
-		</script>
-    </body>
-    </html>
+     <footer>
+       <div class="item-count"></div>
+       <div class="buttons">
+         <button class="all">All</button>
+         <button class="active">Active</button>
+         <button class="completed">Completed</button>
+       </div>
+     </footer>
+    </main>
+    <script type="text/javascript" src="./app.js"></script>
+  </body>
+</html>
