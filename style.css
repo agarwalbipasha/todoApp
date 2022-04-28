@@ -1,0 +1,42 @@
+body {
+    background-color: rgb(252, 247, 247);
+}
+
+header {
+    font-size: 8rem;
+    font-weight: bold;
+    color: rgb(236, 120, 120);
+    text-align: center;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    padding: 3rem;
+}
+#input-area {
+    padding: 1rem;
+    width: 40vw;
+    text-align: left;
+    box-shadow: 2px 2px 20px rgb(220, 217, 217);
+    border: none;
+    line-height: 1.5rem;
+    word-spacing: .2rem;
+    color: black;
+}
+.delete {
+    background-color: red;
+    color: white;
+    border: none;
+    width: 1rem;
+    height: 1rem;
+}
+
+.list-group-item {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    width: 40vw;
+    padding: 1rem;
+
+}
