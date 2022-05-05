@@ -1,8 +1,14 @@
 var form = document.getElementById("addForm");
 var itemList = document.getElementById("items");
+var all = document.querySelector(".all");
+var active = document.querySelector(".active");
+var completed = document.querySelector(".completed");
 
 form.addEventListener("keypress", addItem);
 itemList.addEventListener("click", removeItem);
+all.addEventListener("click", showAll);
+active.addEventListener("click", showActive);
+completed.addEventListener("click", showCompleted);
 
 var arrayOfItems = [];
 
@@ -16,7 +22,7 @@ function addItem(event) {
       var div = document.createElement("div");
       div.appendChild(document.createTextNode(newItem));
       let data = {};
-      data[arrayOfItems.length] = {
+      data[`data${arrayOfItems.length}`] = {
         value: newItem,
         isCompleted: false,
       };
@@ -87,15 +93,78 @@ function checkItem(event) {
   event.preventDefault();
   if (event.target.classList.contains("checkbox")) {
     let targetItem = event.target.parentElement.parentElement.nextSibling;
+    let textValue = targetItem.textContent;
     let tick = event.target.parentElement.children[0];
     if (targetItem.style.textDecoration == "none") {
       tick.checked = true;
       targetItem.style.textDecoration = "line-through";
+      arrayOfItems.map((element) => {
+        for (let key in element) {
+          if (element[key]["value"] == textValue) {
+            element[key]["isCompleted"] = true;
+          }
+        }
+      });
     } else {
       tick.checked = false;
       targetItem.style.textDecoration = "none";
+      arrayOfItems.map((element) => {
+        for (let key in element) {
+          if (element[key]["value"] == textValue) {
+            element[key]["isCompleted"] = false;
+          }
+        }
+      });
     }
   }
 }
 
-// console.log(arrayOfItems);
+function showAll(event) {
+  var list = document.getElementsByTagName("li");
+  for (let element of list) {
+    element.classList.add("show");
+    element.classList.remove("hide");
+  }
+  var itemLength = document.querySelector(".item-count");
+  if (list.length < 2) {
+    itemLength.textContent = `${list.length}` + " item left";
+  } else {
+    itemLength.textContent = `${list.length}` + " items left";
+  }
+}
+
+function showActive(event) {
+  var list = document.getElementsByTagName("li");
+  let length = list.length;
+  for (let element of list) {
+    if (element.children[1].style.textDecoration == "line-through") {
+      element.classList.add("hide");
+      element.classList.remove("show");
+      length--;
+    }
+  }
+  var itemLength = document.querySelector(".item-count");
+  if (list.length < 2) {
+    itemLength.textContent = `${length}` + " item left";
+  } else {
+    itemLength.textContent = `${length}` + " items left";
+  }
+}
+
+function showCompleted(event) {
+  var list = document.getElementsByTagName("li");
+  let length = list.length;
+  for (let element of list) {
+    if (element.children[1].style.textDecoration != "line-through") {
+      element.classList.add("hide");
+      element.classList.remove("show");
+      length--;
+    }
+  }
+  var itemLength = document.querySelector(".item-count");
+  if (length < 2) {
+    itemLength.textContent = `${length}` + " item left";
+  } else {
+    itemLength.textContent = `${length}` + " items left";
+  }
+}
