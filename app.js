@@ -67,17 +67,15 @@ function removeItem(event) {
     event.preventDefault();
     var li = event.target.parentElement;
     var textValue = li.children[1].textContent;
-    var newArray = [];
-    arrayOfItems.filter((element) => {
+    arrayOfItems = arrayOfItems.filter((element) => {
       let keyValue;
       for (let key in element) {
         keyValue = key;
       }
       if (element[keyValue]["value"] != textValue) {
-        newArray.push(element);
+        return element;
       }
     });
-    arrayOfItems = newArray;
     var itemLength = document.querySelector(".item-count");
     if (arrayOfItems.length < 2) {
       itemLength.textContent = `${arrayOfItems.length}` + " item left";
@@ -98,6 +96,7 @@ function checkItem(event) {
     if (targetItem.style.textDecoration == "none") {
       tick.checked = true;
       targetItem.style.textDecoration = "line-through";
+      targetItem.setAttribute("data-completed", "true");
       arrayOfItems.map((element) => {
         for (let key in element) {
           if (element[key]["value"] == textValue) {
@@ -112,6 +111,7 @@ function checkItem(event) {
         for (let key in element) {
           if (element[key]["value"] == textValue) {
             element[key]["isCompleted"] = false;
+            targetItem.setAttribute("data-completed", "false");
           }
         }
       });
@@ -137,7 +137,8 @@ function showActive(event) {
   var list = document.getElementsByTagName("li");
   let length = list.length;
   for (let element of list) {
-    if (element.children[1].style.textDecoration == "line-through") {
+    var dataType = element.children[1].getAttribute("data-completed");
+    if (dataType) {
       element.classList.add("hide");
       element.classList.remove("show");
       length--;
@@ -158,7 +159,8 @@ function showCompleted(event) {
   var list = document.getElementsByTagName("li");
   let length = list.length;
   for (let element of list) {
-    if (element.children[1].style.textDecoration != "line-through") {
+    var dataType = element.children[1].getAttribute("data-completed");
+    if (!dataType) {
       element.classList.add("hide");
       element.classList.remove("show");
       length--;
