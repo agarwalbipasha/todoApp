@@ -16,7 +16,7 @@ function addItem(event) {
   if (event.keyCode === 13) {
     event.preventDefault();
     var newItem = document.querySelector(".input-area").value;
-    if (newItem != "" && newItem != " ") {
+    if (newItem != "" && newItem.trim() != "") {
       var li = document.createElement("li");
       li.classList.add("list-group-item");
       var div = document.createElement("div");
