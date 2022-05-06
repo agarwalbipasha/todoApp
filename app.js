@@ -21,7 +21,7 @@ function addItem(event) {
       li.classList.add("list-group-item");
       var div = document.createElement("div");
       div.appendChild(document.createTextNode(newItem));
-      div.classList.add('text-style');
+      div.classList.add("text-style");
       let data = {};
       data[`data${arrayOfItems.length}`] = {
         value: newItem,
@@ -139,29 +139,7 @@ function showActive(event) {
   let length = list.length;
   for (let element of list) {
     var dataType = element.children[1].getAttribute("data-completed");
-    if (dataType) {
-      element.classList.add("hide");
-      element.classList.remove("show");
-      length--;
-    } else {
-      element.classList.add("show");
-      element.classList.remove("hide");
-    }
-  }
-  var itemLength = document.querySelector(".item-count");
-  if (list.length < 2) {
-    itemLength.textContent = `${length}` + " item left";
-  } else {
-    itemLength.textContent = `${length}` + " items left";
-  }
-}
-
-function showCompleted(event) {
-  var list = document.getElementsByTagName("li");
-  let length = list.length;
-  for (let element of list) {
-    var dataType = element.children[1].getAttribute("data-completed");
-    if (!dataType) {
+    if (dataType == "true") {
       element.classList.add("hide");
       element.classList.remove("show");
       length--;
@@ -172,8 +150,30 @@ function showCompleted(event) {
   }
   var itemLength = document.querySelector(".item-count");
   if (length < 2) {
-    itemLength.textContent = `${length}` + " item left";
+    itemLength.textContent = `${length} item left`;
   } else {
-    itemLength.textContent = `${length}` + " items left";
+    itemLength.textContent = `${length} items left`;
+  }
+}
+
+function showCompleted(event) {
+  var list = document.getElementsByTagName("li");
+  let length = list.length;
+  for (let element of list) {
+    var dataType = element.children[1].getAttribute("data-completed");
+    if (dataType != "true") {
+      element.classList.add("hide");
+      element.classList.remove("show");
+      length--;
+    } else {
+      element.classList.add("show");
+      element.classList.remove("hide");
+    }
+  }
+  var itemLength = document.querySelector(".item-count");
+  if (length < 2) {
+    itemLength.textContent = `${length} item left`;
+  } else {
+    itemLength.textContent = `${length} items left`;
   }
 }
