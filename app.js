@@ -141,6 +141,9 @@ function showActive(event) {
       element.classList.add("hide");
       element.classList.remove("show");
       length--;
+    } else {
+      element.classList.add("show");
+      element.classList.remove("hide");
     }
   }
   var itemLength = document.querySelector(".item-count");
@@ -159,6 +162,9 @@ function showCompleted(event) {
       element.classList.add("hide");
       element.classList.remove("show");
       length--;
+    } else {
+      element.classList.add("show");
+      element.classList.remove("hide");
     }
   }
   var itemLength = document.querySelector(".item-count");
