@@ -21,6 +21,7 @@ function addItem(event) {
       li.classList.add("list-group-item");
       var div = document.createElement("div");
       div.appendChild(document.createTextNode(newItem));
+      div.classList.add('text-style');
       let data = {};
       data[`data${arrayOfItems.length}`] = {
         value: newItem,
@@ -88,12 +89,12 @@ function removeItem(event) {
 
 //line through item
 function checkItem(event) {
-  event.preventDefault();
   if (event.target.classList.contains("checkbox")) {
+    event.preventDefault();
     let targetItem = event.target.parentElement.parentElement.nextSibling;
     let textValue = targetItem.textContent;
     let tick = event.target.parentElement.children[0];
-    if (targetItem.style.textDecoration == "none") {
+    if (targetItem.style.textDecoration != "line-through") {
       tick.checked = true;
       targetItem.style.textDecoration = "line-through";
       targetItem.setAttribute("data-completed", "true");

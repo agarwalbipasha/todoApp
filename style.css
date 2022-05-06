@@ -108,3 +108,6 @@ ul {
 .show {
   visibility: visible;
 }
+.text-style {
+  text-decoration: none;
+}
